@@ -10,6 +10,6 @@
     "d-utils" : "0.0.x"
   }
 , "devDependencies": {
-    "it-is": "~0.0.3"
+    "it-is": "0.0.2-2"
   }
 , "author": "Dominic Tarr <dominic.tarr@gmail.com> (http://bit.ly/dominictarr)" }
