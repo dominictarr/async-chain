@@ -1,10 +1,10 @@
 # construct async chains.
 
-var ch = new Chains({
-  //object of async functions
-  method1: function (arg1,arg2, callback) {},
-  method2: function (arg1,arg2, callback) {}
-})
+    var ch = new Chains({
+      //object of async functions
+      method1: function (arg1,arg2, callback) {},
+      method2: function (arg1,arg2, callback) {}
+    })
 
 then call methods like this:
 
@@ -18,10 +18,10 @@ The events are the names of the methods. Also, you can pass callbacks in the usu
 
 if a method calls back with an argument in the first slot Chain will emit 'error'
 
-#conventions
+##conventions
 
 async-chains depends on some strict conventions.
 
-    * no varible arguments. the number of arguments will be asserted.
-    * callback must be last.
-    * functions may refur to `this`. this will be the `Chain` instance 
+  * no varible arguments. the number of arguments will be asserted.
+  * callback must be last.
+  * functions may refur to `this`. this will be the `Chain` instance 
