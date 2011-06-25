@@ -6,6 +6,10 @@
   { "type": "git"
   , "url": "https://github.com/dominictarr/async-chain.git" }
 , "main": "async-chain"
-, "dependencies": {}
-, "devDependencies": {}
+, "dependencies": {
+    "d-utils" : "0.0.x"
+  }
+, "devDependencies": {
+    "it-is": "~0.0.3"
+  }
 , "author": "Dominic Tarr <dominic.tarr@gmail.com> (http://bit.ly/dominictarr)" }
