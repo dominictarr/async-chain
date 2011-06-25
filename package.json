@@ -1,0 +1,11 @@
+{ "name": "async-chain"
+, "version": "0.0.0"
+, "description": ""
+, "homepage": "http://github.com/dominictarr/async-chain"
+, "repository": 
+  { "type": "git"
+  , "url": "https://github.com/dominictarr/async-chain.git" }
+, "main": "async-chain"
+, "dependencies": {}
+, "devDependencies": {}
+, "author": "Dominic Tarr <dominic.tarr@gmail.com> (http://bit.ly/dominictarr)" }
