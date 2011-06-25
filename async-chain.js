@@ -8,6 +8,17 @@ function Chain (obj) {
   var self = this
     , pending = []
     , drained = false
+    , working = false
+    , jobs = []
+    function nextJob(){
+      if(working) return
+      console.log('START',jobs[0], working)
+      working = true
+      if(jobs.length){
+        var n = jobs.shift()
+        n[1].apply(self, n[2])
+      }
+    }
 
   u.merge(this,u.map(obj,function (funx,event){
     return function (){
@@ -25,7 +36,7 @@ function Chain (obj) {
       //
 
       function done (err){
-        inCallback = true
+        console.log('DONE', jobs[0], working)
         var args = [].slice.call(arguments)
           , errors = []
         function tryIt(funx){
@@ -44,21 +55,24 @@ function Chain (obj) {
           self.emit.apply(self,[event].concat(args))
         })
 
-        pending.splice(pending.indexOf(done),1)
+        working = false
 
-        if(!pending.length && !drained)
-          drained = true, process.nextTick(function (){ 
-            console.log('drain',pending,pending.length, self)
-            if(!pending.length) self.emit('drain') })
+        if(jobs.length) nextJob()
         else
-          drained = false
+          process.nextTick(function (){ 
+            console.log('drain',pending,pending.length, self)
+            self.emit('drain') 
+          })
+
         if(errors.length) throw errors.length == 1 ? errors[0] : errors
       }
 
       pending.push(done)
       args.push(done)
 
-      funx.apply(obj,args)
+      jobs.push([event, funx, args])
+
+      nextJob()
 
       return this
     }

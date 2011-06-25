@@ -12,8 +12,7 @@ return new Chain ({
     byebye: function (name, cb){
       var str = 'byebye, ' + name
       console.log(str)
-      if(sync) cb(null,str)
-      else process.nextTick(function (){cb(null,str)})
+      cb(null,str)
     },
   })
 }
