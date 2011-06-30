@@ -12,7 +12,6 @@ function Chain (obj) {
     , jobs = []
     function nextJob(){
       if(working) return
-      console.log('START',jobs[0], working)
       working = true
       if(jobs.length){
         var n = jobs.shift()
@@ -30,13 +29,12 @@ function Chain (obj) {
         callback = args.pop()
       }
       else if(l != args.length + 1)
-        throw new Error(key + ' takes ' + (l - 1) + ' arguments, got:' + args.length + '(callback is implicit)')
+        throw new Error(event + ' takes ' + (l - 1) + ' arguments, got:' + args.length + '(callback is implicit)')
       //
       //emit event when callback is called.
       //
 
       function done (err){
-        console.log('DONE', jobs[0], working)
         var args = [].slice.call(arguments)
           , errors = []
         function tryIt(funx){
@@ -47,12 +45,12 @@ function Chain (obj) {
         if(callback) tryIt(function (){ 
           callback.apply(null, args) 
         })
-        console.log('emit',event, err)
         if(err) tryIt(function (){ 
           self.emit.apply(self,['error'].concat(args)) 
         })
         else tryIt(function (){
           self.emit.apply(self,[event].concat(args))
+          self.emit.apply(self,['change',event].concat(args))
         })
 
         working = false
@@ -60,7 +58,6 @@ function Chain (obj) {
         if(jobs.length) nextJob()
         else
           process.nextTick(function (){ 
-            console.log('drain',pending,pending.length, self)
             self.emit('drain') 
           })
 
