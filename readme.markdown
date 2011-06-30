@@ -18,6 +18,9 @@ The events are the names of the methods. Also, you can pass callbacks in the usu
 
 if a method calls back with an argument in the first slot Chain will emit 'error'
 
+also, an Chains emits a 'change' event, that emits the same arguments as the normal event, 
+but with the event name as the first argument.
+
 ##conventions
 
 async-chains depends on some strict conventions.
