@@ -103,3 +103,12 @@ exports ['emit events with done'] = function (test){
     test.done()
   })
 }
+
+exports ['throw if given an invalid function'] = function (test){
+it(function (){
+  new Chain ({
+      invalid: function (){}
+    })
+  }).throws()
+test.done()
+}

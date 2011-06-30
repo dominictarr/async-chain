@@ -20,12 +20,14 @@ function Chain (obj) {
     }
 
   u.merge(this,u.map(obj,function (funx,event){
+    if(!funx.length)
+      throw new Error('all functions must take callbacks:' + funx + ' did not have any arguments')
     return function (){
       var l = funx.length
         , args = [].slice.call(arguments)
         , callback
 
-      if(l == args.length && u.isFunction(u.last(args))){
+      if(l == args.length && args.length && u.isFunction(u.last(args))){
         callback = args.pop()
       }
       else if(l != args.length + 1)
