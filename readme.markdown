@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/dominictarr/async-chain.png)](http://travis-ci.org/dominictarr/async-chain)
 # construct async chains.
 
     var ch = new Chains({
